@@ -6,22 +6,22 @@ import (
 	"net/http"
 )
 
-type config struct {
-	nodes string
-	debug bool
+type Config struct {
+	Nodes string
+	Debug bool
 }
 
-var Config config
+var Cfg Config
 
 func main() {
-	nodesFlag := flag.String("nodes", "/etc/moximo/nodes", "Node config file")
+	nodesFlag := flag.String("nodes", "/etc/moximo/nodes", "Node Config file")
 	debugFlag := flag.Bool("d", false, "Enable debugging")
 	flag.Parse()
 
-	Config := &config{nodes: *nodesFlag, debug: *debugFlag}
+	Cfg = Config{Nodes: *nodesFlag, Debug: *debugFlag}
 
 	log.Printf("Starting moximo master with flags:\nNodes file: %s\nDebug mode:%b\n",
-		Config.nodes, Config.debug)
+		Cfg.Nodes, Cfg.Debug)
 	router := NewRouter()
 
 	log.Fatal(http.ListenAndServe(":8081", router))
