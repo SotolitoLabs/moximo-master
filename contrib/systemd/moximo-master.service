@@ -1,0 +1,8 @@
+[Unit]
+Description=Moximo Master
+
+[Service]
+ExecStart=/usr/bin/moximo-master
+
+[Install]
+WantedBy=multi-user.target
