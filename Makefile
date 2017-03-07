@@ -8,7 +8,6 @@ ifeq ($(GOARCH), )
 	GOARCH=amd64
 endif
 
-
 BINARY=_output/build/${GOARCH}/moximo-master
 
 all:
