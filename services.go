@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"log"
+	"net"
 	"net/http"
 	"os"
 	"strconv"
@@ -15,6 +16,18 @@ import (
  */
 
 func Index(w http.ResponseWriter, r *http.Request) {
+	ip_port := strings.Split(r.Host, ":")
+	local, err := net.LookupIP(ip_port[0])
+	CheckError(err)
+	ip_port = strings.Split(r.RemoteAddr, ":")
+	remote, err := net.LookupIP(ip_port[0])
+	CheckError(err)
+
+	if local[0].Equal(remote[0]) {
+		fmt.Fprintln(w, "IM_THE_CHOSEN_ONE")
+		return
+	}
+
 	fmt.Fprintln(w, "MASTER_OK")
 }
 

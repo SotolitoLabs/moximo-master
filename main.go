@@ -19,7 +19,8 @@ func main() {
 	flag.Parse()
 
 	Cfg = Config{Nodes: *nodesFlag, Debug: *debugFlag}
-	log.Printf("Starting moximo master with flags:\nNodes file: %s\nDebug mode: %s\n",
+	log.Printf("listening on port *:8081")
+	log.Printf("Starting moximo master with flags:\nNodes file: %s\nDebug mode: %t\n",
 		Cfg.Nodes, Cfg.Debug)
 	router := NewRouter()
 
