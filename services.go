@@ -38,7 +38,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 func NextIP(w http.ResponseWriter, r *http.Request) {
 	name, ip := getNextNode()
 	writeLine(Cfg.Nodes, ip)
-	writeLine("/etc/hosts", ip+"    "+node_name)
+	writeLine("/etc/hosts", ip+"    "+name)
 	fmt.Fprintln(w, ip+":"+name)
 }
 
