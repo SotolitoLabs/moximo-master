@@ -1,11 +1,11 @@
 # Targets (see each target for more information):
 #   all: Build code.
 
-# Default is x86_64
+# Default is arm
 #
 
 ifeq ($(GOARCH), )
-	GOARCH=amd64
+	GOARCH=arm
 endif
 
 BINARY=_output/build/${GOARCH}/moximo-master
@@ -15,3 +15,6 @@ all:
 
 clean:
 	rm -rf _output
+
+install:
+	cp $BINARY /usr/bin/moximo-master
