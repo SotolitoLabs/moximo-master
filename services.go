@@ -36,8 +36,10 @@ func Index(w http.ResponseWriter, r *http.Request) {
  */
 
 func NextIP(w http.ResponseWriter, r *http.Request) {
-	ip := getNextIp()
+	name, ip := getNextNode()
 	writeLine(Cfg.Nodes, ip)
+	//writeLine("/etc/hosts", ip + "    " + node_name)
+	writeLine("hosts", ip+"     "+name)
 	fmt.Fprintln(w, ip)
 }
 
@@ -46,18 +48,19 @@ func NextIP(w http.ResponseWriter, r *http.Request) {
  * available.
  */
 
-func getNextIp() string {
+func getNextNode() (string, string) {
 	last := getLastLine(Cfg.Nodes)
 	splitted := strings.Split(last, ".")
 	next, _ := strconv.Atoi(splitted[3])
 	next++
+	node_name := "moximo-node-" + strconv.Itoa(next)
 	splitted[3] = strconv.Itoa(next)
 	newip := strings.Join(splitted, ".")
 	if Cfg.Debug {
 		log.Printf("getNextIP:: Last IP: %s", last)
 	}
 	log.Printf("Next IP: %s", newip)
-	return newip
+	return node_name, newip
 }
 
 /*
